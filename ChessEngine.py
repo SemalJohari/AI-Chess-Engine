@@ -40,7 +40,7 @@ class GameState:
         self.CastleRightsLog = [CastleRights(self.WhiteCastleKingside, self.BlackCastleKingside,
                                              self.WhiteCastleQueenside, self.BlackCastleQueenside)]
 
-    def make_move(self, move, promotion_piece=None):
+    def make_move(self, move):
         print(f"Making move from {move.start_row, move.start_col} to {move.end_row, move.end_col}")
         self.board[move.end_row][move.end_col] = move.piece_moved
         self.board[move.start_row][move.start_col] = "--"
@@ -372,14 +372,14 @@ class GameState:
         if self.WhiteToMove and self.WhiteCastleKingside:
             if self.board[r][7] == 'wR':  # Ensure the rook is still on its initial square
                 self.get_kingside_castle_moves(r, c, moves, allyColor)
-        elif not self.WhiteToMove and self.BlackCastleKingside:
+        if not self.WhiteToMove and self.BlackCastleKingside:
             if self.board[r][7] == 'bR':  # Ensure the rook is still on its initial square
                 self.get_kingside_castle_moves(r, c, moves, allyColor)
 
-        elif self.WhiteToMove and self.WhiteCastleQueenside:
+        if self.WhiteToMove and self.WhiteCastleQueenside:
             if self.board[r][0] == 'wR':  # Ensure the rook is still on its initial square
                 self.get_queenside_castle_moves(r, c, moves, allyColor)
-        elif not self.WhiteToMove and self.BlackCastleQueenside:
+        if not self.WhiteToMove and self.BlackCastleQueenside:
             if self.board[r][0] == 'bR':  # Ensure the rook is still on its initial square
                 self.get_queenside_castle_moves(r, c, moves, allyColor)
 
